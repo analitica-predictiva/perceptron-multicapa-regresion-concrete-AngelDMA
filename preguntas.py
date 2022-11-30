@@ -68,7 +68,9 @@ def pregunta_03():
     # Importe MLPRegressor
     # Importe MinMaxScaler
     # Importe Pipeline
-    from ____ import ____
+    from sklearn.neural_network import MLPRegressor
+    from sklearn.preprocessing import MinMaxScaler
+    from sklearn.pipeline import Pipeline
 
     # Cree un pipeline que contenga un estimador MinMaxScaler y un estimador
     # MLPRegressor
@@ -76,11 +78,11 @@ def pregunta_03():
         steps=[
             (
                 "minmaxscaler",
-                ____(___),
+                MinMaxScaler(),
             ),
             (
                 "mlpregressor",
-                ____(____),
+                MLPRegressor(),
             ),
         ],
     )
@@ -108,13 +110,13 @@ def pregunta_04():
     #   * Use parada temprana
 
     param_grid = {
-        ___: ____,
-        ___: ____,
-        ___: ____,
-        ___: ____,
-        ___: ____,
-        ___: ____,
-        ___: ____,
+        'hidden_layer_sizes': range(1, 8),
+        'activation': ['relu'],
+        'learning_rate': ['adaptive'],
+        'momentum': [0.7, 0.8, 0.9],
+        'learning_rate_init': [0.01, 0.05, 0.1],
+        'max_iter': [5000],
+        'early_stopping': [True],
     }
 
     estimator = pregunta_03()
@@ -123,12 +125,12 @@ def pregunta_04():
     # y los siguientes parámetros adicionales:
     #  * Validación cruzada con 5 particiones
     #  * Compare modelos usando r^2
-    # gridsearchcv = GridSearchCV(
-    #    estimator=estimator,
-    #    param_grid=param_grid,
-    #    ___=____
-    #    ___=____
-    # )
+    gridsearchcv = GridSearchCV(
+        estimator=estimator,
+        param_grid=param_grid,
+        cv=5,
+        scoring='r2'
+    )
 
     return gridsearchcv
 
